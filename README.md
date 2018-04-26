@@ -18,7 +18,7 @@ This should install all the needed packages and start a local server.
 
 ## Test
 
-We want to build a news explorer that gets news from [News API](https://newsapi.org/)].
+We want to build a news explorer that gets news from [News API](https://newsapi.org/).
 
 * The user must be able to filter news by:
   * a global search

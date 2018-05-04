@@ -10,6 +10,10 @@ In the next 4h, you will be developing a small Angular application.
 
 This should install all the needed packages and start a local server.
 
+## Git: init and how to use it
+
+If you got this project via a zip file, please do a `git init`. Commit regularily, so that we can see how you use git and what your development workflow was. When you send us back your results, make sure to inlcude the .git folder!
+
 ## Dependencies and APIs
 
 * Angular 5 with the Angular CLI

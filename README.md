@@ -27,7 +27,7 @@ We want to build a news explorer that gets news from [News API](https://newsapi.
 * The user must be able to filter news by:
   * a global search
   * a list of sources
-* As soon as the user changes the fitlers, the news must be updated.
+* As soon as the user changes the filters, the news must be updated.
 * She also must be able to save filters and watch the news associated with them later.
 * She can see the saved filters in the navigation bar.
 * The app must look like `docs/sketch.jpg`

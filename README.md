@@ -1,7 +1,9 @@
 # Interfacewerk News Explorer Test
 
 Hello! Welcome to our Angular development test. This test has been created in order to assess your level.
-In the next 4h, you will be developing a small Angular application.
+In the next few hours, you will be developing a small Angular application.
+
+**Important: Please read this readme until the end!**
 
 ## Setup
 

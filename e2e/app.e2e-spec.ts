@@ -1,6 +1,6 @@
 import { AppPage } from './app.po';
 
-describe('ng-app-seed App', () => {
+describe('iw-news-explorer-test App', () => {
   let page: AppPage;
 
   beforeEach(() => {

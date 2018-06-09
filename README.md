@@ -1,24 +1,44 @@
 # Interfacewerk News Explorer Test
 
+**Important: Please read this readme until the end!**
+
 Hello! Welcome to our Angular development test. This test has been created in order to assess your level.
 In the next few hours, you will be developing a small Angular application.
 
-**Important: Please read this readme until the end!**
-
 ## Setup
 
-* If you use Docker: `docker-compose up`
-* If you don't: `npm install && npm start`
+### Docker
+
+We've set everything up so that you can easily get started with Docker. The following command starts a shell session in Docker.
+
+`docker-compose run --service-ports --workdir /myapp app sh`
+
+From there, you can run the usual Angular CLI commands through npm:
+
+* `npm start` continuously builds and serves the app
+* `npm run ng g component my-component` scaffolds a new component
+* etc.
+
+### Without Docker 
+
+If you don't use Docker. Do the following: `npm install && npm start`
 
 This should install all the needed packages and start a local server.
 
-## Git: init and how to use it
+## Git
 
-If you got this project via a zip file, please do a `git init`. Commit regularily, so that we can see how you use git and what your development workflow was. When you send us back your results, make sure to inlcude the .git folder!
+If you got this project via a zip file, please do a `git init`. Commit regularily, so that we can see how you use git and what your development workflow was. When you send us back your results, make sure to inlcude the .git folder and remove the node_modules/!
+
+## Angular CLI
+
+Please use the [Angular CLI](https://cli.angular.io/). Two reasons for that:
+
+* it reduces your development time and effort
+* it establishes conventions
 
 ## Dependencies, APIs and helpers
 
-* Angular 5 with the Angular CLI
+* Angular 6 with the Angular CLI
 * We have pre-installed for you 3 packages: font-awesome, bootstrap (CSS only) and primeng
 * Use the `NewsApiService` defined in `services/news-api.service.ts` to use the News API. For further documentation, check https://newsapi.org/docs/endpoints/everything and https://newsapi.org/docs/endpoints/sources
 * Use the `FeedStoreService` defined in `services/feed-store.service.ts` to store pre-saved feeds.

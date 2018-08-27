@@ -53,7 +53,10 @@ We want to build a news explorer that gets news from [News API](https://newsapi.
 * As soon as the user changes the filters, the news must be updated.
 * She also must be able to save filters (so called feeds: NewsFeed) and watch the news associated with them later.
 * She can see the saved filters in the navigation bar.
-* The app must look like ![docs/Home.png](docs/Home.png) and ![docs/Saved.png](docs/Saved.png)
+* We recommend that you focus on the functionality first. If you have time left, you can of course style the app.
+* Here is an idea of how the UI could look like
 
-We recommend that you focus on the functionality first. If you have time left, you can of course style the app.
+![docs/Home.png](docs/Home.png)
+![docs/Saved.png](docs/Saved.png)
+
 

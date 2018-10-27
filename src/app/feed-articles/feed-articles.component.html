@@ -1,0 +1,16 @@
+<ng-template [ngIf]="isOk">
+
+  <ol>
+    <ng-template ngFor [ngForOf]="articles" let-article>
+      <li>{{article.title}}</li>
+    </ng-template>
+  </ol>
+
+  <p-paginator
+    [totalRecords]="totalRecords"
+    [rows]="rows"
+    (onPageChange)="setPage($event)"
+  ></p-paginator>
+</ng-template>
+
+<p *ngIf="error">{{error}}</p>

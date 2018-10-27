@@ -1,5 +1,7 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { of } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 import { environment } from '../../environments/environment';
 
 @Injectable()
@@ -22,6 +24,12 @@ export class NewsApiService {
     q: string
     sources: string[]
   }) {
+    // used to avoid to reach API limits while testing
+    // return of(<NewsAPI.NewsResult>{
+    //   articles: [],
+    //   status: 'ok',
+    //   totalResults: 0
+    // });
     return this.http.get<NewsAPI.NewsResult>('https://newsapi.org/v2/everything', {
       params: {
         page: String(options.page),
@@ -31,6 +39,18 @@ export class NewsApiService {
         sources: options.sources.join(','),
         apiKey: environment.apiKey
       }
-    });
+    })
+    .pipe(
+      catchError((error: HttpErrorResponse) => {
+        if (error.status === 400) {
+          return of(<NewsAPI.NewsResult>{
+            articles: [],
+            status: 'error',
+            totalResults: 0,
+            error: error.error.message
+          });
+        }
+      })
+    );
   }
 }

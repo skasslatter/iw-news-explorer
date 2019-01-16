@@ -40,6 +40,7 @@ declare namespace NewsAPI {
     articles: Article[]
     status: 'ok' | 'error'
     totalResults: number
+    error?: string
   }
 
   type Error = {

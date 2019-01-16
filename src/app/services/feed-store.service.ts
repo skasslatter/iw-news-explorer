@@ -46,8 +46,8 @@ export class FeedStoreService {
   }
 
   update(id: string, options: {
-    name: string
-    filters: NewsFeedFilter
+    name?: string
+    filters?: NewsFeedFilter
   }): Observable<NewsFeed> {
     return new Observable(obs => {
       const feeds = this.newsFeedsSubject.value;
@@ -55,9 +55,11 @@ export class FeedStoreService {
       if (idx === -1) {
         return;
       }
-      feeds[idx] = Object.assign({
-        id,
-      }, options);
+      feeds[idx] = {
+        filters: options.filters || feeds[idx].filters,
+        id: feeds[idx].id,
+        name: options.name || feeds[idx].name
+      };
       this.newsFeedsSubject.next(feeds.slice(0));
       this.write();
       obs.next(feeds[idx]);

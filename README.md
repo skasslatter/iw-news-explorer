@@ -27,7 +27,7 @@ Please use the [Angular CLI](https://cli.angular.io/). Two reasons for that:
 
 ## Dependencies, APIs and helpers
 
-* Angular 6 with the Angular CLI
-* We have pre-installed for you 3 packages: font-awesome, bootstrap (CSS only) and primeng
-* Use the `NewsApiService` defined in `services/news-api.service.ts` to use the News API. For further documentation, check https://newsapi.org/docs/endpoints/everything and https://newsapi.org/docs/endpoints/sources
+* Angular 7 with the Angular CLI.
+* Font-awesome and Primeng.
+* Use the `NewsApiService` defined in `services/news-api.service.ts` to use the News API. For further documentation, check [https://newsapi.org/docs/endpoints/everything](News) and [https://newsapi.org/docs/endpoints/sources](Sources).
 * Use the `FeedStoreService` defined in `services/feed-store.service.ts` to store pre-saved feeds.

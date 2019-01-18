@@ -1,6 +1,9 @@
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { of } from 'rxjs';
+import { FeedStoreService } from '../services/feed-store.service';
 import { MenuComponent } from './menu.component';
+
 
 describe('MenuComponent', () => {
   let component: MenuComponent;
@@ -8,9 +11,15 @@ describe('MenuComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ MenuComponent ]
+      declarations: [MenuComponent],
+      schemas: [NO_ERRORS_SCHEMA],
+      providers: [
+        { provide: FeedStoreService, useValue: {
+          feeds$: of([])
+        }}
+      ]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

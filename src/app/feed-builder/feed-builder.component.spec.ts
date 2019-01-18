@@ -1,6 +1,7 @@
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { FeedBuilderComponent } from './feed-builder.component';
+
 
 describe('FeedBuilderComponent', () => {
   let component: FeedBuilderComponent;
@@ -8,14 +9,20 @@ describe('FeedBuilderComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ FeedBuilderComponent ]
+      declarations: [FeedBuilderComponent],
+      schemas: [NO_ERRORS_SCHEMA]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(FeedBuilderComponent);
     component = fixture.componentInstance;
+    component.availableSources = [];
+    component.filter = {
+      q: '',
+      sources: []
+    };
     fixture.detectChanges();
   });
 

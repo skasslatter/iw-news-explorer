@@ -28,7 +28,7 @@
     [availableSources]="availableSources"
   ></app-feed-builder>
   
-  <app-feed-articles *ngIf="newsResult$ | async as result" [newsResult]="result" (pagination)="setPagination($event)"></app-feed-articles>
+  <app-feed-articles *ngIf="newsResult" [newsResult]="newsResult" (pagination)="setPagination($event)"></app-feed-articles>
 
   <ng-template iwDialog #createDialog="iw-dialog" [containerClass]="'create-dialog'">
     <h3 class="first">Give it a name</h3>

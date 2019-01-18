@@ -14,7 +14,7 @@ import { NewsApiService } from '../services/news-api.service';
 export class FeedComponent implements OnInit {
   @ViewChild('createDialog') createDialog: DialogDirective;
 
-  newsResult$: Observable<NewsAPI.NewsResult>;
+  newsResult: NewsAPI.NewsResult;
   newsFilter$: Observable<NewsFeedFilter>;
   isNewFeed$: Observable<boolean>;
   isSavedFeed$: Observable<boolean>;
@@ -51,26 +51,33 @@ export class FeedComponent implements OnInit {
       this.targetResetFilter = filter;
       this.filterForBuilder.next(filter);
     });
-    this.newsResult$ = combineLatest(
+
+    const requestParameters = combineLatest(
       this.filterForBuilder,
       this.pagination
-    ).pipe(switchMap(([filter, pagination]) => {
-      return this.api.getNews({
+    ).pipe(map(([filter, pagination]) => {
+      return {
         page: pagination.page,
         pageSize: pagination.pageSize,
         q: filter.q,
         sources: filter.sources
-      });
-    })).pipe(share());
+      };
+    }));
 
+    requestParameters.subscribe(parameters => {
+      this.api.getNews(parameters)
+        .subscribe(r => {
+          this.newsResult = r;
+        });
+    });
+  }
+
+  ngOnInit() {
     this.api.getSources()
       .subscribe(s => {
         this.availableSources = s.sources;
         this.isLoaded = true;
       });
-  }
-
-  ngOnInit() {
   }
 
   onFilterChange($event: NewsFeedFilter) {

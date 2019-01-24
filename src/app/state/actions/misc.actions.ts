@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Action } from 'redux';
+import { LOAD_INITIAL, SET_INITIAL_DATA, LOAD_FEED, FEED_LOADED } from './actions.enum';
 
 export type InitialLoadAction = Action<'LOAD_INITIAL'>;
+
 export type SetInitialDataAction = Action<'SET_INITIAL_DATA'> & {
   sourceResult: NewsAPI.SourceResult
   feeds: NewsFeed[]
@@ -21,19 +23,19 @@ export type FeedLoadedAction = Action<'FEED_LOADED'> & {
 export class MiscActions {
 
   loadInitialData(): InitialLoadAction {
-    return { type: 'LOAD_INITIAL' };
+    return { type: LOAD_INITIAL };
   }
 
   setInitialData(sourceResult: NewsAPI.SourceResult, feeds: NewsFeed[]): SetInitialDataAction {
-    return { type: 'SET_INITIAL_DATA', sourceResult, feeds };
+    return { type: SET_INITIAL_DATA, sourceResult, feeds };
   }
 
   loadFeed(feedId: string): LoadFeedAction {
-    return { type: 'LOAD_FEED', feedId };
+    return { type: LOAD_FEED, feedId };
   }
 
   feedLoaded(feed: NewsFeed): FeedLoadedAction {
-    return { type: 'FEED_LOADED', feed };
+    return { type: FEED_LOADED, feed };
   }
 
 }

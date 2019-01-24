@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 import { SelectItem } from 'primeng/api';
 import { Observable, Subject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
-import { ArticlesActions } from '../state/actions/articles-actions';
+import { ArticlesActions } from '../state/actions/articles.actions';
 import { IRootState } from '../state/reducers/root.reducer';
 
 @Component({

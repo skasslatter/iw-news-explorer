@@ -1,5 +1,6 @@
 import { Reducer } from 'redux';
 import { FeedLoadedAction } from '../actions/misc.actions';
+import { LOAD_INITIAL, SET_INITIAL_DATA, LOAD_FEED, FEED_LOADED } from '../actions/actions.enum';
 
 export interface IMiscState {
   isGettingFeed: boolean;
@@ -19,20 +20,20 @@ export const miscReducer: Reducer<IMiscState> = (state, action) => {
   }
 
   switch (action.type) {
-    case 'LOAD_INITIAL': return {
+    case LOAD_INITIAL: return {
       ...state,
       isInitialLoading: true
     };
-    case 'SET_INITIAL_DATA': return {
+    case SET_INITIAL_DATA: return {
       ...state,
       isInitialLoading: false,
       sourceResult: action.sourceResult
     };
-    case 'LOAD_FEED': return {
+    case LOAD_FEED: return {
       ...state,
       isGettingFeed: true
     };
-    case 'FEED_LOADED': return {
+    case FEED_LOADED: return {
       ...state,
       currentFeed: (action as FeedLoadedAction).feed,
       isGettingFeed: false

@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Action } from 'redux';
+import { SET_FILTERS_PAGINATION, SET_RESULT } from './actions.enum';
 
 export type SetFiltersPaginationAction = Action<string> & {
   type: 'SET_FILTERS_PAGINATION'
@@ -22,7 +23,7 @@ export class ArticlesActions {
     filter: NewsFeedFilter
   ): SetFiltersPaginationAction {
     return {
-      type: 'SET_FILTERS_PAGINATION',
+      type: SET_FILTERS_PAGINATION,
       pagination,
       filter
     };
@@ -30,7 +31,7 @@ export class ArticlesActions {
 
   setResult(result: NewsAPI.NewsResult):  SetResultAction {
     return {
-      type: 'SET_RESULT',
+      type: SET_RESULT,
       result
     };
   }

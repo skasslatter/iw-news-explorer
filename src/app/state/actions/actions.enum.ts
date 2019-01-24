@@ -1,0 +1,9 @@
+export const SET_FILTERS_PAGINATION = 'SET_FILTERS_PAGINATION';
+export const SET_RESULT = 'SET_RESULT';
+export const REMOVE_FEED = 'REMOVE_FEED';
+export const ADD_FEED = 'ADD_FEED';
+export const UPDATE_FEED = 'UPDATE_FEED';
+export const LOAD_INITIAL = 'LOAD_INITIAL';
+export const SET_INITIAL_DATA = 'SET_INITIAL_DATA';
+export const LOAD_FEED = 'LOAD_FEED';
+export const FEED_LOADED = 'FEED_LOADED';

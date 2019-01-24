@@ -4,7 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { ArticlesActions } from '../state/actions/articles-actions';
+import { ArticlesActions } from '../state/actions/articles.actions';
 import { MiscActions } from '../state/actions/misc.actions';
 import { IRootState } from '../state/reducers/root.reducer';
 

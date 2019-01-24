@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { DialogDirective } from 'iwerk-angular-ui';
 import { Observable } from 'rxjs';
 import { FeedStoreService } from '../services/feed-store.service';
-import { FeedsActions } from '../state/actions/feeds-actions';
+import { FeedsActions } from '../state/actions/feeds.actions';
 import { IRootState } from '../state/reducers/root.reducer';
 
 @Component({

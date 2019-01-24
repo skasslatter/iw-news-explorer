@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Action } from 'redux';
+import { REMOVE_FEED, ADD_FEED, UPDATE_FEED } from './actions.enum';
 
 export type RemoveFeedAction = Action<string> & {
   type: 'REMOVE_FEED'
@@ -22,21 +23,21 @@ export type UpdateFeedAction = Action<string> & {
 export class FeedsActions {
   remove(feedId: string): RemoveFeedAction {
     return {
-      type: 'REMOVE_FEED',
+      type: REMOVE_FEED,
       feedId
     };
   }
 
   add(feed: NewsFeed): AddFeedAction {
     return {
-      type: 'ADD_FEED',
+      type: ADD_FEED,
       feed
     };
   }
 
   update(feed: NewsFeed): UpdateFeedAction {
     return {
-      type: 'UPDATE_FEED',
+      type: UPDATE_FEED,
       feed
     };
   }

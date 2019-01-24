@@ -88,6 +88,10 @@ export class AppModule {
         createLogger(),
         epicMiddleware
       ]);
-    epicMiddleware.run(combineEpics(articlesEpic.fetch, miscEpic.fetch, miscEpic.loadFeed));
+    epicMiddleware.run(combineEpics(
+      articlesEpic.fetch,
+      miscEpic.loadInitialData,
+      miscEpic.loadFeed
+    ));
   }
 }

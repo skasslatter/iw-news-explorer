@@ -1,7 +1,7 @@
 import { NgRedux, select } from '@angular-redux/store';
 import { Component } from '@angular/core';
 import { Observable } from 'rxjs';
-import { ArticlesActions } from '../state/actions/articles-actions';
+import { ArticlesActions } from '../state/actions/articles.actions';
 import { IRootState } from '../state/reducers/root.reducer';
 
 @Component({

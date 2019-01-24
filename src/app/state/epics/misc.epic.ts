@@ -1,10 +1,12 @@
 import { Injectable } from '@angular/core';
 import { ActionsObservable, ofType } from 'redux-observable';
-import { map, mergeMap, delay } from 'rxjs/operators';
-import { NewsApiService } from '../../services/news-api.service';
-import { InitialLoadAction, MiscActions, LoadFeedAction } from '../actions/misc.actions';
 import { forkJoin, of } from 'rxjs';
+import { delay, map, mergeMap, takeUntil } from 'rxjs/operators';
 import { FeedStoreService } from '../../services/feed-store.service';
+import { NewsApiService } from '../../services/news-api.service';
+import { LOAD_FEED, LOAD_INITIAL } from '../actions/actions.enum';
+import { InitialLoadAction, LoadFeedAction, MiscActions } from '../actions/misc.actions';
+import { STD_SMOOTH_DELAY } from '../../config';
 
 @Injectable({
   providedIn: 'root'
@@ -17,16 +19,16 @@ export class MiscEpic {
   ) {
   }
 
-  fetch = (action$: ActionsObservable<InitialLoadAction>) => {
+  loadInitialData = (action$: ActionsObservable<InitialLoadAction>) => {
     return action$
       .pipe(
-        ofType('LOAD_INITIAL'),
+        ofType(LOAD_INITIAL),
         mergeMap(() => {
           return forkJoin(
             this.api.getSources(),
             this.storeApi.list()
           )
-            .pipe(delay(2000))
+            .pipe(delay(2 * STD_SMOOTH_DELAY))
             .pipe(map(([sources, feeds]) => this.miscActions.setInitialData(sources, feeds)));
         })
       );
@@ -35,15 +37,17 @@ export class MiscEpic {
   loadFeed = (action$: ActionsObservable<LoadFeedAction>) => {
     return action$
       .pipe(
-        ofType('LOAD_FEED'),
+        ofType(LOAD_FEED),
         mergeMap(action => {
           if (!action.feedId) {
             return of(this.miscActions.feedLoaded(undefined));
           }
           return this.storeApi.get(action.feedId)
             .pipe(
-              delay(1000),
-              map(feed => this.miscActions.feedLoaded(feed))
+              delay(STD_SMOOTH_DELAY),
+              map(feed => this.miscActions.feedLoaded(feed)),
+              // we cancel the previous requests
+              takeUntil(action$.pipe(ofType(LOAD_FEED)))
             );
         })
       );

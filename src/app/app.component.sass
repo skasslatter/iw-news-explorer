@@ -38,10 +38,11 @@
   transform: translate3d(0, 0, 0)
   backface-visibility: hidden
   perspective: 1000px
+  transform: rotate(-90deg)
 
 @keyframes shake
   10%, 30%, 50%, 70%, 90%
-    transform: translate3d(0, -2px, 0)
+    transform: translate3d(-2px, 0, 0) rotate(-90deg)
   
   0%, 20%, 40%, 60%, 80%
-    transform: translate3d(0, 2px, 0)
+    transform: translate3d(2px, 0, 0) rotate(-90deg)

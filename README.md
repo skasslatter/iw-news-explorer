@@ -28,7 +28,7 @@ Please use the [Angular CLI](https://cli.angular.io/). Two reasons for that:
 ## Dependencies, APIs and helpers
 
 * Angular 7 with the Angular CLI.
-* @angular-redux/store
+* @angular-redux
 * Font-awesome and Primeng.
 
 ## Architecture

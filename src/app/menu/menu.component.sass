@@ -1,6 +1,7 @@
 
 \:host
-  background-color: lightgrey
+  background-color: rgb(39, 39, 39)
+  color: rgb(135, 135, 135)
   display: block
   height: 100%
   width: 200px
@@ -11,6 +12,7 @@
 .menu-title
   margin: 0 0 20px 0
   padding: 0 10px
+  color: white
 
 ol
   list-style: none
@@ -30,5 +32,9 @@ li
   outline: none
   color: darkgrey
 
+  &:not(.active):hover
+    color: rgb(255, 187, 3)
+
 li.active
-  color: black
+  color: rgb(255, 187, 3)
+  text-decoration: underline

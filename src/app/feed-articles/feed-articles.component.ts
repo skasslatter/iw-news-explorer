@@ -1,42 +1,49 @@
-import { Component, Input, OnChanges, Output, EventEmitter } from '@angular/core';
+import { NgRedux, select } from '@angular-redux/store';
+import { Component } from '@angular/core';
+import { Observable } from 'rxjs';
+import { ArticlesActions } from '../state/actions/articles-actions';
+import { IRootState } from '../state/reducers/root.reducer';
 
 @Component({
   selector: 'app-feed-articles',
   templateUrl: './feed-articles.component.html',
   styleUrls: ['./feed-articles.component.sass']
 })
-export class FeedArticlesComponent implements OnChanges {
-  @Input() newsResult: NewsAPI.NewsResult;
-  @Output() pagination = new EventEmitter<{page: number, pageSize: number}>();
+export class FeedArticlesComponent {
+  @select((s: IRootState) => s.articles.result.articles)
+  articles$: Observable<NewsAPI.Article[]>;
 
-  rows = 10;
+  @select((s: IRootState) => s.articles.result.error)
+  error$: Observable<string>;
 
-  constructor() { }
+  @select((s: IRootState) => s.articles.pagination.pageSize)
+  pageSize$: Observable<string>;
 
-  ngOnChanges() {
-  }
+  @select((s: IRootState) => s.articles.result.totalResults)
+  totalRecords$: Observable<string>;
 
-  get articles() {
-    return this.newsResult.articles;
-  }
+  @select((s: IRootState) => s.articles.result.status === 'ok')
+  isOk$: Observable<NewsAPI.Article[]>;
 
-  get error() {
-    return this.newsResult.error;
-  }
+  @select((s: IRootState) => (s.articles.pagination.page - 1) * s.articles.pagination.pageSize)
+  first$: Observable<NewsAPI.Article[]>;
 
-  get isOk() {
-    return this.newsResult.status === 'ok';
-  }
+  constructor(
+    private redux: NgRedux<IRootState>,
+    private articlesActions: ArticlesActions
+  ) {
 
-  get totalRecords() {
-    return this.newsResult.totalResults;
   }
 
   setPage($event: { first: number }) {
-    this.pagination.emit({
-      page: 1 + $event.first / this.rows,
-      pageSize: this.rows
-    });
+    const pageSize = this.redux.getState().articles.pagination.pageSize;
+    this.redux.dispatch(this.articlesActions.setFiltersPagination(
+      {
+        page: 1 + $event.first / pageSize,
+        pageSize
+      },
+      this.redux.getState().articles.filter
+    ));
   }
 
 }

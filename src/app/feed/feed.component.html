@@ -1,44 +1,12 @@
-<ng-template [ngIf]="isLoaded">
-  <div class="feed-top">
-    <h1 class="feed-title">
-      <ng-container *ngIf="isSavedFeed$ | async">
-        {{name}}
-      </ng-container>
-      <ng-container *ngIf="isNewFeed$ | async">
-        New feed
-      </ng-container>
-    </h1>
-    <div class="feed-buttons">
-      <ng-template [ngIf]="isNewFeed$ | async">
-        <p-button (onClick)="create()" label="Save as new"></p-button>
-      </ng-template>
-    
-      <ng-template [ngIf]="isSavedFeed$ | async">
-        <button pButton label="Save" type="button" (click)="save()"></button>
-        <button pButton label="Reset" type="button" (click)="reset()"></button>
-        <button pButton label="Delete" type="button" (click)="delete()"></button>
-      </ng-template>
-    </div>
-  </div>
-  
+<div class="feed-loading-layer" *ngIf="isLoadingFeed$ | async">
+  <fa-icon class="feed-loading-icon"
+    [icon]="feedLoadingIcon"
+    [spin]="true"
+  ></fa-icon> The explorer is loading your news feed parameters.
+</div>
 
-  <app-feed-builder
-    [filter]="filterForBuilder | async"
-    (filterChange)="onFilterChange($event)"
-    [availableSources]="availableSources"
-  ></app-feed-builder>
-  
-  <app-feed-articles *ngIf="newsResult" [newsResult]="newsResult" (pagination)="setPagination($event)"></app-feed-articles>
+<app-feed-header (reset)="onReset()"></app-feed-header>
 
-  <ng-template iwDialog #createDialog="iw-dialog" [containerClass]="'create-dialog'">
-    <h3 class="first">Give it a name</h3>
+<app-feed-builder></app-feed-builder>
 
-    <input type="text" [(ngModel)]="newFeedName" pInputText placeholder="e.g. sports news" />
-
-    <div class="dialog-buttons">
-      <button class="ui-button-secondary" pButton type="button" (click)="cancel()" label="Cancel"></button>
-      <button [disabled]="!newFeedName" pButton type="button" (click)="confirmCreate()" label="Create"></button>
-    </div>
-  </ng-template>
-
-</ng-template>
+<app-feed-articles *ngIf="newsResult$ | async as result"></app-feed-articles>

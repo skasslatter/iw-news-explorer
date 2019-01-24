@@ -1,8 +1,15 @@
 <h2 class="menu-title">News explorer</h2>
 
 <ol>
-  <li [routerLink]="['/']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Home</li>
+  <li
+    [routerLink]="['/']"
+    routerLinkActive="active"
+    [routerLinkActiveOptions]="{exact: true}"
+  >Home</li>
   <ng-template ngFor [ngForOf]="feeds$ | async" let-feed>
-    <li [routerLink]="getFeedLink(feed)" routerLinkActive="active">{{getFeedName(feed)}}</li>
+    <li
+      [routerLink]="getFeedLink(feed)"
+      routerLinkActive="active"
+    >{{getFeedName(feed)}}</li>
   </ng-template>
 </ol>

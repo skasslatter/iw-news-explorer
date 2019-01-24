@@ -1,44 +1,43 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { NgRedux, select } from '@angular-redux/store';
+import { Component } from '@angular/core';
 import { SelectItem } from 'primeng/api';
-import { Subject } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
+import { ArticlesActions } from '../state/actions/articles-actions';
+import { IRootState } from '../state/reducers/root.reducer';
 
 @Component({
   selector: 'app-feed-builder',
   templateUrl: './feed-builder.component.html',
   styleUrls: ['./feed-builder.component.sass']
 })
-export class FeedBuilderComponent implements OnInit {
-  @Input() filter: NewsFeedFilter;
-  @Input() availableSources: NewsAPI.Source[];
-
-  @Output() filterChange = new EventEmitter<NewsFeedFilter>();
+export class FeedBuilderComponent {
   onQueryChange: (query: string) => void;
 
-  get options(): SelectItem[] {
-    return this.availableSources.map(s => (<SelectItem>{
-      id: s.id,
-      value: s.id,
-      label: s.name
-    }));
-  }
+  @select((state: IRootState) => state.misc.sourceResult.sources.map(s => (<SelectItem>{
+    id: s.id,
+    value: s.id,
+    label: s.name
+  })))
+  availableSources$: Observable<SelectItem[]>;
 
-  get query() {
-    return this.filter ? this.filter.q : '';
-  }
+  @select((s: IRootState) => s.articles.filter.q || '')
+  query$: Observable<string>;
 
-  get sources() {
-    return this.filter ? this.filter.sources : [];
-  }
+  @select((s: IRootState) => s.articles.filter.sources || [])
+  sources$: Observable<string[]>;
 
-  constructor() {
+  constructor(
+    private redux: NgRedux<IRootState>,
+    private articlesActions: ArticlesActions
+  ) {
     this.onQueryChange = (() => {
       const subj = new Subject<string>();
       subj.pipe(debounceTime(1000))
         .subscribe(query => {
-          this.filterChange.emit({
+          this.dispatch({
             q: query,
-            sources: this.filter.sources
+            sources: this.redux.getState().articles.filter.sources
           });
         });
       return (query: string) => {
@@ -47,13 +46,17 @@ export class FeedBuilderComponent implements OnInit {
     })();
   }
 
-  ngOnInit() {
-  }
-
   onSourcesChange(sources: string[]) {
-    this.filterChange.emit({
-      q: this.filter.q,
+    this.dispatch({
+      q: this.redux.getState().articles.filter.q,
       sources
     });
+  }
+
+  private dispatch(filter: NewsFeedFilter) {
+    this.redux.dispatch(this.articlesActions.setFiltersPagination(
+      this.redux.getState().articles.pagination,
+      filter
+    ));
   }
 }

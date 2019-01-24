@@ -6,6 +6,7 @@ import { of } from 'rxjs';
 import { FeedStoreService } from '../services/feed-store.service';
 import { NewsApiService } from '../services/news-api.service';
 import { FeedComponent } from './feed.component';
+import { NgReduxTestingModule } from '@angular-redux/store/testing';
 
 
 describe('FeedComponent', () => {
@@ -15,7 +16,7 @@ describe('FeedComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [FeedComponent],
-      imports: [DialogModule, RouterTestingModule],
+      imports: [DialogModule, RouterTestingModule, NgReduxTestingModule],
       schemas: [NO_ERRORS_SCHEMA],
       providers: [{
         provide: NewsApiService,

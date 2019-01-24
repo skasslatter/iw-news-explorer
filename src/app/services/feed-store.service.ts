@@ -1,18 +1,10 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class FeedStoreService {
-  private newsFeedsSubject = new BehaviorSubject<NewsFeed[]>([]);
-
-  constructor() {
-    this.newsFeedsSubject.next(this.read());
-  }
-
-  get newsFeeds(): Observable<NewsFeed[]> {
-    return this.newsFeedsSubject.asObservable();
-  }
-
   create(options: {
     name: string
     filters: NewsFeedFilter
@@ -21,10 +13,9 @@ export class FeedStoreService {
       const filter: NewsFeed = Object.assign({
         id: String( Math.floor(Math.random() * 1000000) )
       }, options);
-      const feeds = this.newsFeedsSubject.value;
+      const feeds = this.read();
       feeds.push(filter);
-      this.newsFeedsSubject.next(feeds.slice(0));
-      this.write();
+      this.write(feeds);
       obs.next(filter);
       obs.complete();
     });
@@ -32,14 +23,13 @@ export class FeedStoreService {
 
   remove(id: string): Observable<void> {
     return new Observable(obs => {
-      const feeds = this.newsFeedsSubject.value;
+      const feeds = this.read();
       const idx = feeds.findIndex(f => f.id === id);
       if (idx === -1) {
         return;
       }
       feeds.splice(idx, 1);
-      this.newsFeedsSubject.next(feeds.slice(0));
-      this.write();
+      this.write(feeds);
       obs.next();
       obs.complete();
     });
@@ -50,7 +40,7 @@ export class FeedStoreService {
     filters?: NewsFeedFilter
   }): Observable<NewsFeed> {
     return new Observable(obs => {
-      const feeds = this.newsFeedsSubject.value;
+      const feeds = this.read();
       const idx = feeds.findIndex(f => f.id === id);
       if (idx === -1) {
         return;
@@ -60,8 +50,7 @@ export class FeedStoreService {
         id: feeds[idx].id,
         name: options.name || feeds[idx].name
       };
-      this.newsFeedsSubject.next(feeds.slice(0));
-      this.write();
+      this.write(feeds);
       obs.next(feeds[idx]);
       obs.complete();
     });
@@ -69,7 +58,14 @@ export class FeedStoreService {
 
   get(id: string): Observable<NewsFeed> {
     return new Observable(obs => {
-      obs.next(this.newsFeedsSubject.value.find(f => f.id === id));
+      obs.next(this.read().find(f => f.id === id));
+      obs.complete();
+    });
+  }
+
+  list(): Observable<NewsFeed[]> {
+    return new Observable(obs => {
+      obs.next(this.read());
       obs.complete();
     });
   }
@@ -82,7 +78,7 @@ export class FeedStoreService {
     return JSON.parse(str);
   }
 
-  private write() {
-    localStorage.setItem('newsFeeds', JSON.stringify(this.newsFeedsSubject.value));
+  private write(feeds: NewsFeed[]) {
+    localStorage.setItem('newsFeeds', JSON.stringify(feeds));
   }
 }

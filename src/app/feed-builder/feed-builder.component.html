@@ -1,3 +1,11 @@
-<input type="text" [ngModel]="query" (ngModelChange)="onQueryChange($event)" placeholder="search terms" pInputText/>
+<input type="text"
+  [ngModel]="query$ | async"
+  (ngModelChange)="onQueryChange($event)"
+  placeholder="search terms"
+  pInputText />
 
-<p-multiSelect [options]="options" [ngModel]="sources" (ngModelChange)="onSourcesChange($event)"></p-multiSelect>
+<p-multiSelect
+  [options]="availableSources$ | async"
+  [ngModel]="sources$ | async"
+  (ngModelChange)="onSourcesChange($event)"
+></p-multiSelect>

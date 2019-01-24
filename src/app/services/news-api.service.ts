@@ -4,7 +4,9 @@ import { of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { environment } from '../../environments/environment';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class NewsApiService {
 
   constructor(private http: HttpClient) { }

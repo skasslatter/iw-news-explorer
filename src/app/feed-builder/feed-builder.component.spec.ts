@@ -1,6 +1,7 @@
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FeedBuilderComponent } from './feed-builder.component';
+import { NgReduxTestingModule } from '@angular-redux/store/lib/testing';
 
 
 describe('FeedBuilderComponent', () => {
@@ -10,7 +11,8 @@ describe('FeedBuilderComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [FeedBuilderComponent],
-      schemas: [NO_ERRORS_SCHEMA]
+      schemas: [NO_ERRORS_SCHEMA],
+      imports: [NgReduxTestingModule]
     })
       .compileComponents();
   }));
@@ -18,11 +20,6 @@ describe('FeedBuilderComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(FeedBuilderComponent);
     component = fixture.componentInstance;
-    component.availableSources = [];
-    component.filter = {
-      q: '',
-      sources: []
-    };
     fixture.detectChanges();
   });
 

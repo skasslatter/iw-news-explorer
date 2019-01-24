@@ -5,3 +5,43 @@
   max-width: 900px
   width: 100%
   margin: auto
+
+.loading-container
+  flex: 1 1
+  height: 100%
+  position: relative
+
+.loading-layer
+  position: absolute
+  top: 0
+  left: 0
+  height: 100%
+  width: 100%
+  background: rgba(0, 0, 0, 0.5)
+  color: white
+  display: flex
+  justify-content: center
+  align-items: center
+  z-index: 1
+
+.app-loading-layer
+  width: 100%
+  height: 100%
+  font-size: 42px
+  display: flex
+  justify-content: center
+  align-items: center
+
+.app-loading-icon
+  margin-right: 20px
+  animation: shake 0.82s cubic-bezier(.36,.07,.19,.97) both infinite
+  transform: translate3d(0, 0, 0)
+  backface-visibility: hidden
+  perspective: 1000px
+
+@keyframes shake
+  10%, 30%, 50%, 70%, 90%
+    transform: translate3d(0, -2px, 0)
+  
+  0%, 20%, 40%, 60%, 80%
+    transform: translate3d(0, 2px, 0)

@@ -1,10 +1,12 @@
-import { TestBed, async } from '@angular/core/testing';
-import { AppComponent } from './app.component';
+import { NgReduxTestingModule } from '@angular-redux/store/lib/testing';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { async, TestBed } from '@angular/core/testing';
+import { AppComponent } from './app.component';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
+      imports: [NgReduxTestingModule],
       declarations: [
         AppComponent
       ],

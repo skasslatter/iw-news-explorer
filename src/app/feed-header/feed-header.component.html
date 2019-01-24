@@ -1,0 +1,30 @@
+<h1 class="feed-title">
+  <ng-container *ngIf="isSavedFeed$ | async">
+    {{ name$ | async }}
+  </ng-container>
+  <ng-container *ngIf="isNewFeed$ | async">
+    New feed
+  </ng-container>
+</h1>
+<div class="feed-buttons">
+  <ng-template [ngIf]="isNewFeed$ | async">
+    <p-button (onClick)="onCreate()" label="Save as new"></p-button>
+  </ng-template>
+
+  <ng-template [ngIf]="isSavedFeed$ | async">
+    <button pButton label="Save" type="button" (click)="onSave()"></button>
+    <button pButton label="Reset" type="button" (click)="onReset()"></button>
+    <button pButton label="Delete" type="button" (click)="onDelete()"></button>
+  </ng-template>
+</div>
+
+<ng-template iwDialog #createDialog="iw-dialog" [containerClass]="'create-dialog'">
+  <h3 class="first">Give it a name</h3>
+
+  <input type="text" [(ngModel)]="newFeedName" pInputText placeholder="e.g. sports news" />
+
+  <div class="dialog-buttons">
+    <button class="ui-button-secondary" pButton type="button" (click)="onCancel()" label="Cancel"></button>
+    <button [disabled]="!newFeedName" pButton type="button" (click)="onConfirmCreate()" label="Create"></button>
+  </div>
+</ng-template>

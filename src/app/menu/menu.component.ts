@@ -1,23 +1,16 @@
-import { Component, OnInit } from '@angular/core';
-import { FeedStoreService } from '../services/feed-store.service';
+import { select } from '@angular-redux/store';
+import { Component } from '@angular/core';
 import { Observable } from 'rxjs';
+import { IRootState } from '../state/reducers/root.reducer';
 
 @Component({
   selector: 'app-menu',
   templateUrl: './menu.component.html',
   styleUrls: ['./menu.component.sass']
 })
-export class MenuComponent implements OnInit {
+export class MenuComponent {
+  @select((s: IRootState) => s.feeds.feeds)
   feeds$: Observable<NewsFeed[]>;
-
-  constructor(
-    private store: FeedStoreService
-  ) {
-    this.feeds$ = this.store.newsFeeds;
-  }
-
-  ngOnInit() {
-  }
 
   getFeedLink(feed: NewsFeed) {
     return [feed.id];

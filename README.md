@@ -1,4 +1,4 @@
-# Interfacewerk News Explorer Test
+# News Explorer
 
 ## Docker
 
@@ -32,3 +32,31 @@ Please use the [Angular CLI](https://cli.angular.io/). Two reasons for that:
 * Font-awesome and Primeng.
 * Use the `NewsApiService` defined in `services/news-api.service.ts` to use the News API. For further documentation, check [https://newsapi.org/docs/endpoints/everything](News) and [https://newsapi.org/docs/endpoints/sources](Sources).
 * Use the `FeedStoreService` defined in `services/feed-store.service.ts` to store pre-saved feeds.
+
+## Architecture
+
+### No backend
+
+At the moment there is no backend to store user's data, no need to worry about that. We focus on the frontend.
+
+### Redux Store
+
+We store the application state in a redux store. To change the state, you must dispatch actions. Those actions will then be digested by reducers to generate a new state.
+
+### Redux Effects
+
+There are asynchronous side effects performed in this application:
+
+* when we fetch news to render them
+* when we load the feed
+
+Usually, we want to display a loading indicator when those requests are sent and we want to change the application state when we receive the response. It usually looks like:
+
+```js
+dispatch(loadingStateAction(…))
+sendRequest().then(res => dispatch(setResponseAction(res)))
+```
+
+We decided to use the `redux-observable` epics to perform all of this. The idea is that the component now only dispatches one action. This action is then digested by a function called an "epic", which in turns sends the request and returns an observable of another redux action, which changes the state.
+
+One advantage of doing so is to decouple the application business logic from the components. Testing and debugging is therefore easier and the code in components is much simpler.

@@ -10,19 +10,19 @@ import { IRootState } from '../state/reducers/root.reducer';
   styleUrls: ['./feed-articles.component.sass']
 })
 export class FeedArticlesComponent {
-  @select((s: IRootState) => s.articles.result.articles)
+  @select((s: IRootState) => s.articles.result ? s.articles.result.articles : [])
   articles$: Observable<NewsAPI.Article[]>;
 
-  @select((s: IRootState) => s.articles.result.error)
+  @select((s: IRootState) => s.articles.result ? s.articles.result.error : '')
   error$: Observable<string>;
 
-  @select((s: IRootState) => s.articles.pagination.pageSize)
+  @select((s: IRootState) => s.articles.result ? s.articles.pagination.pageSize : 0)
   pageSize$: Observable<string>;
 
-  @select((s: IRootState) => s.articles.result.totalResults)
+  @select((s: IRootState) => s.articles.result ? s.articles.result.totalResults : 0)
   totalRecords$: Observable<string>;
 
-  @select((s: IRootState) => s.articles.result.status === 'ok')
+  @select((s: IRootState) => s.articles.result ? s.articles.result.status === 'ok' : false)
   isOk$: Observable<NewsAPI.Article[]>;
 
   @select((s: IRootState) => (s.articles.pagination.page - 1) * s.articles.pagination.pageSize)

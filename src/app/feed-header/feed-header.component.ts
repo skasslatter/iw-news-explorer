@@ -24,7 +24,7 @@ export class FeedHeaderComponent {
 
   @Output() reset = new EventEmitter();
 
-  @ViewChild('createDialog') createDialog: DialogDirective;
+  @ViewChild('createDialog', { static: false }) createDialog: DialogDirective;
 
   newFeedName = '';
 

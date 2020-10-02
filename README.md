@@ -1,5 +1,11 @@
 # News Explorer
 
+The News Explorer is a web application that enables the user to read news: the user can search for specific terms and save those searches.
+
+It is based on the API provided by https://newsapi.org.
+
+## Getting Started
+
 To get started, do the following:
 
 `npm install && npm start`

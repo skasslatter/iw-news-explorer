@@ -24,6 +24,8 @@ import { ArticlesEpic } from './state/epics/articles.epic';
 import { MiscEpic } from './state/epics/misc.epic';
 import { IRootState, rootReducer } from './state/reducers/root.reducer';
 import { ArticleSummaryComponent } from './article-summary/article-summary.component';
+import { MatCardModule } from "@angular/material/card";
+import { MatButtonModule } from "@angular/material/button";
 
 @NgModule({
   declarations: [
@@ -54,7 +56,9 @@ import { ArticleSummaryComponent } from './article-summary/article-summary.compo
     ButtonModule,
     IwDialogModule,
     NgReduxModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    MatCardModule,
+    MatButtonModule
   ],
   providers: [],
   bootstrap: [AppComponent]

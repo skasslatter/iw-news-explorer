@@ -1,6 +1,8 @@
 <mat-card class="mat-elevation-z5">
   <mat-card-header>
-    <img mat-card-avatar src='{{article.urlToImage}}'
+    <img mat-card-avatar
+         *ngIf='article.urlToImage'
+         src='{{article.urlToImage}}'
          alt='Image'
     />
     <mat-card-title>
@@ -16,9 +18,30 @@
   <mat-card-content>
     <p>{{article.description | limitTo: 200}}</p>
   </mat-card-content>
-
   <mat-card-actions>
-    <button mat-button>SEE MORE</button>
-  </mat-card-actions>
 
+    <p-button (click)="showDialog()" label="See more" styleClass="p-button-warning"></p-button>
+    <p-dialog header="{{article.title}}"
+              [(visible)]="displayModal"
+              [draggable]="false"
+              [resizable]="false"
+              [modal]="true"
+              [style]="{width: '80vw'}"
+              [baseZIndex]="10000"
+    >
+      <img src='{{article.urlToImage}}'
+           width='100px'
+           height='100px'
+           alt='News'
+      >
+      <p>{{article.content}}</p>
+      <br/>
+      <a href="{{article.url}}"
+         target='_blank'
+      >
+        Visit the website to see the full article
+      </a>
+    </p-dialog>
+
+  </mat-card-actions>
 </mat-card>

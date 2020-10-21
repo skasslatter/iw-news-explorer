@@ -26,6 +26,7 @@ import { IRootState, rootReducer } from './state/reducers/root.reducer';
 import { ArticleSummaryComponent } from './article-summary/article-summary.component';
 import { MatCardModule } from "@angular/material/card";
 import { MatButtonModule } from "@angular/material/button";
+import { TruncatePipe } from './pipes/truncate/truncate.pipe';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { MatButtonModule } from "@angular/material/button";
     FeedBuilderComponent,
     FeedArticlesComponent,
     FeedHeaderComponent,
-    ArticleSummaryComponent
+    ArticleSummaryComponent,
+    TruncatePipe,
   ],
   imports: [
     BrowserModule,
@@ -91,9 +93,9 @@ export class AppModule {
         feeds: []
       }
     }, [
-        createLogger(),
-        epicMiddleware
-      ]);
+      createLogger(),
+      epicMiddleware
+    ]);
     epicMiddleware.run(combineEpics(
       articlesEpic.fetch,
       miscEpic.loadInitialData,

@@ -14,8 +14,7 @@
   </mat-card-header>
 
   <mat-card-content>
-    <small *ngIf='author'>by {{author}}</small>
-    <p>{{description | limitTo: 200}}</p>
+    <p>{{article.description | limitTo: 200}}</p>
   </mat-card-content>
 
   <mat-card-actions>

@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import Article = NewsAPI.Article;
 
 @Component({
   selector: 'app-article-summary',
@@ -7,10 +8,7 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class ArticleSummaryComponent implements OnInit {
 
-  @Input() title: string
-  @Input() author: string
-  @Input() publishedAt: string
-  @Input() description: string
+  @Input() article: Article
 
   constructor() { }
 

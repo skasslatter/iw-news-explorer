@@ -10,16 +10,9 @@ export class ArticleSummaryComponent implements OnInit {
 
   @Input() article: Article
 
-  displayModal: boolean;
-
   constructor() {
   }
 
   ngOnInit() {
-  }
-
-  showDialog() {
-    this.displayModal=false;
-    this.displayModal = true;
   }
 }

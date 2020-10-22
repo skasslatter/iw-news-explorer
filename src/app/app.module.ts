@@ -27,6 +27,7 @@ import { ArticleSummaryComponent } from './article-summary/article-summary.compo
 import { MatCardModule } from "@angular/material/card";
 import { MatButtonModule } from "@angular/material/button";
 import { TruncatePipe } from './pipes/truncate/truncate.pipe';
+import { ArticleModalComponent } from './article-modal/article-modal.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { TruncatePipe } from './pipes/truncate/truncate.pipe';
     FeedHeaderComponent,
     ArticleSummaryComponent,
     TruncatePipe,
+    ArticleModalComponent,
   ],
   imports: [
     BrowserModule,

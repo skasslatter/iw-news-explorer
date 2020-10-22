@@ -4,13 +4,14 @@
          *ngIf='article.urlToImage'
          src='{{article.urlToImage}}'
          alt='Image'
-    />
+    >
     <mat-card-title>
       {{article.title}}
     </mat-card-title>
     <mat-card-subtitle>
       <small>{{article.publishedAt |  date:'medium'}}</small>
-      <br/>
+    </mat-card-subtitle>
+    <mat-card-subtitle>
       <small *ngIf='article.author'>by {{article.author}} for {{article.source.name}}</small>
     </mat-card-subtitle>
   </mat-card-header>
@@ -20,7 +21,8 @@
   </mat-card-content>
 
   <mat-card-actions>
-    <app-article-modal [article]="article"></app-article-modal>
+    <app-article-modal [article]="article"
+    ></app-article-modal>
   </mat-card-actions>
 
 </mat-card>

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import Article = NewsAPI.Article;
 
 @Component({
@@ -6,18 +6,13 @@ import Article = NewsAPI.Article;
   templateUrl: './article-modal.component.html',
   styleUrls: ['./article-modal.component.sass']
 })
-export class ArticleModalComponent implements OnInit {
+export class ArticleModalComponent {
   displayModal: boolean;
 
-  @Input() article: Article
+  @Input()
+  article: Article
 
-  constructor() {
-  }
-
-  ngOnInit() {
-  }
-
-  showDialog() {
+  showModal() {
     this.displayModal = true;
   }
 }

@@ -4,10 +4,10 @@ import { Pipe} from '@angular/core';
   name: 'limitTo'
 })
 export class TruncatePipe {
-  transform(value: string, args: number) : string {
-    let limit = args ? args : 10;
-    let trail = '...';
-
-    return value.length > limit ? value.substring(0, limit) + trail : value;
+  transform(value: string, limit: number = 10) : string {
+    if (!value) {
+      return ''
+    }
+    return value.length > limit ? value.substring(0, limit) + '...' : value;
   }
 }

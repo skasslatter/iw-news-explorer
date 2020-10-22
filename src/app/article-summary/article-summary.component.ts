@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import Article = NewsAPI.Article;
 
 @Component({
@@ -6,13 +6,8 @@ import Article = NewsAPI.Article;
   templateUrl: './article-summary.component.html',
   styleUrls: ['./article-summary.component.sass']
 })
-export class ArticleSummaryComponent implements OnInit {
+export class ArticleSummaryComponent {
 
-  @Input() article: Article
-
-  constructor() {
-  }
-
-  ngOnInit() {
-  }
+  @Input()
+  article: Article
 }

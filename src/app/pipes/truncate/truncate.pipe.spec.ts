@@ -9,7 +9,7 @@ describe('TruncatePipe', () => {
   it('transforms "This is a very long text" to "This ..."', () => {
     expect(pipe.transform('This is a very long text', 5)).toBe('This ...');
   });
-  it('transforms "This is a very long text" to "This ..."', () => {
+  it('transforms "This is a very long text" to "This is a very long text"', () => {
     expect(pipe.transform('This is a very long text', 50)).toBe('This is a very long text');
   });
 });

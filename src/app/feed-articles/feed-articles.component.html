@@ -1,7 +1,9 @@
 <ng-template [ngIf]="isOk$ | async">
   <ol>
     <ng-template ngFor [ngForOf]="articles$ | async" let-article>
-      <li>{{article.title}}</li>
+      <app-article-summary [article]="article"
+      >
+      </app-article-summary>
     </ng-template>
   </ol>
 

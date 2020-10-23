@@ -1,0 +1,30 @@
+<p-button (click)="showModal()"
+          label="See more"
+          styleClass="p-button-warning"
+>
+</p-button>
+
+<p-dialog header="{{article.title}}"
+          [(visible)]="displayModal"
+          [modal]="true"
+          [style]="{width: '80vw'}"
+          [baseZIndex]="10000"
+>
+  <img src='{{article.urlToImage}}'
+       alt='Headline image'
+  >
+  <p>{{article.content}}</p>
+  <br/>
+  <a href="{{article.url}}"
+     target='_blank'
+  >
+    Visit the website to see the full article
+  </a>
+  <div>
+    <p-button (click)="displayModal=false"
+              label="Close"
+              class="p-button-text"
+    >
+    </p-button>
+  </div>
+</p-dialog>

@@ -23,6 +23,11 @@ import { MenuComponent } from './menu/menu.component';
 import { ArticlesEpic } from './state/epics/articles.epic';
 import { MiscEpic } from './state/epics/misc.epic';
 import { IRootState, rootReducer } from './state/reducers/root.reducer';
+import { ArticleSummaryComponent } from './article-summary/article-summary.component';
+import { MatCardModule } from "@angular/material/card";
+import { MatButtonModule } from "@angular/material/button";
+import { TruncatePipe } from './pipes/truncate/truncate.pipe';
+import { ArticleModalComponent } from './article-modal/article-modal.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +36,10 @@ import { IRootState, rootReducer } from './state/reducers/root.reducer';
     FeedComponent,
     FeedBuilderComponent,
     FeedArticlesComponent,
-    FeedHeaderComponent
+    FeedHeaderComponent,
+    ArticleSummaryComponent,
+    TruncatePipe,
+    ArticleModalComponent,
   ],
   imports: [
     BrowserModule,
@@ -52,7 +60,9 @@ import { IRootState, rootReducer } from './state/reducers/root.reducer';
     ButtonModule,
     IwDialogModule,
     NgReduxModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    MatCardModule,
+    MatButtonModule
   ],
   providers: [],
   bootstrap: [AppComponent]
@@ -85,9 +95,9 @@ export class AppModule {
         feeds: []
       }
     }, [
-        createLogger(),
-        epicMiddleware
-      ]);
+      createLogger(),
+      epicMiddleware
+    ]);
     epicMiddleware.run(combineEpics(
       articlesEpic.fetch,
       miscEpic.loadInitialData,

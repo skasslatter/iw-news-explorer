@@ -34,6 +34,7 @@ declare namespace NewsAPI {
     title: string
     url: string
     urlToImage: string
+    content: string
   }
 
   type NewsResult = {

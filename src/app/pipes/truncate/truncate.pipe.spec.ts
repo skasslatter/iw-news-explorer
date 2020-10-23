@@ -12,4 +12,7 @@ describe('TruncatePipe', () => {
   it('transforms "This is a very long text" to "This is a very long text"', () => {
     expect(pipe.transform('This is a very long text', 50)).toBe('This is a very long text');
   });
+  it('transforms null to empty string', () => {
+    expect(pipe.transform(null)).toBe('');
+  });
 });
